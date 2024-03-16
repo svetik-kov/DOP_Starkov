@@ -11,6 +11,8 @@ export const appReducer = (state: AppStateType = initialState, action: ActionsTy
   switch (action.type) {
     case 'APP/SET-STATUS':
       return {...state,status:action.status}
+    case 'APP/ERROR-MASSAGE':
+      return {...state,error: action.error}
     default:
       return state
   }
@@ -20,5 +22,9 @@ export const appReducer = (state: AppStateType = initialState, action: ActionsTy
 export const setAppStatus=(status:RequestStatusType)=>{
   return { type:'APP/SET-STATUS',status} as const
 }
+export const errorMassage=(error:null |string)=>{
+  return {type:'APP/ERROR-MASSAGE',error} as const
+}
+type ErrorMassage=ReturnType<typeof errorMassage>
 type SetAppStatusType=ReturnType<typeof setAppStatus>
-type ActionsType = SetAppStatusType
+type ActionsType = SetAppStatusType|ErrorMassage
